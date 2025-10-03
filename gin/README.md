@@ -42,6 +42,98 @@
 - [x] 통합 테스트(테스트 라우터 구성)
 - [x] 린팅(golangci-lint)과 포맷팅(go fmt)
 
+## 🚀 Advanced - 심화 학습
+> 기본기를 모두 익힌 후, 더 큰 규모의 시스템을 구축하기 위한 고급 주제들
+
+### API 문서화
+- [ ] **Swagger/OpenAPI 3.0 (swaggo)**: API 문서 자동 생성
+  - 코드 주석에서 API 스펙 자동 추출
+  - 대화형 API 테스트 UI 제공
+  - 클라이언트 SDK 자동 생성 지원
+- [ ] **API 버전 관리**: 하위 호환성 유지 전략
+
+### 아키텍처 & 설계
+- [ ] **마이크로서비스 아키텍처 (MSA)**: 서비스 분리와 독립적 배포
+  - 서비스 간 통신 패턴
+  - 분산 트랜잭션 처리
+  - 서비스 디스커버리
+- [ ] **메시지 큐 (Kafka, RabbitMQ, NATS)**: 비동기 메시지 처리
+  - 이벤트 드리븐 아키텍처
+  - Pub/Sub 패턴 구현
+  - 메시지 신뢰성 보장
+- [ ] **gRPC**: 고성능 RPC 프레임워크
+  - Protocol Buffers 정의
+  - 양방향 스트리밍
+  - 서비스 간 효율적 통신
+- [ ] **GraphQL**: 유연한 데이터 쿼리
+  - 스키마 정의
+  - Resolver 구현
+  - DataLoader 패턴
+- [ ] **WebSocket**: 실시간 양방향 통신
+  - 채팅 시스템 구현
+  - 실시간 알림
+  - 협업 도구 개발
+
+### 인프라 & DevOps
+- [ ] **컨테이너 (Docker)**: 애플리케이션 패키징
+  - 멀티스테이지 빌드
+  - 이미지 최적화
+  - Docker Compose 활용
+- [ ] **컨테이너 오케스트레이션 (Kubernetes)**: 대규모 컨테이너 관리
+  - Deployment, Service, Ingress
+  - Auto-scaling (HPA, VPA)
+  - ConfigMap, Secret 관리
+  - Helm Charts 작성
+- [ ] **CI/CD 파이프라인**: 자동화된 배포
+  - GitHub Actions / GitLab CI
+  - ArgoCD (GitOps)
+  - Blue-Green / Canary 배포
+  - 자동 롤백 전략
+- [ ] **클라우드 플랫폼 (AWS, GCP, Azure)**: 클라우드 네이티브 개발
+  - Serverless (Lambda, Cloud Functions)
+  - 관리형 서비스 활용 (RDS, S3, CDN)
+  - Infrastructure as Code (Terraform)
+  - 비용 최적화
+
+### 데이터 관리 심화
+- [ ] **캐싱 전략 (Redis, Memcached)**: 성능 최적화
+  - 캐시 무효화 전략
+  - 분산 캐싱
+  - Session Store
+  - Pub/Sub 메시징
+- [ ] **검색 엔진 (Elasticsearch)**: 고급 검색 기능
+  - 풀텍스트 검색
+  - 집계(Aggregation)
+  - 로그 분석 (ELK Stack)
+  - 실시간 인덱싱
+- [ ] **NoSQL 데이터베이스**: 유연한 데이터 모델
+  - MongoDB (Document DB)
+  - DynamoDB (Key-Value)
+  - Cassandra (Wide Column)
+  - Neo4j (Graph DB)
+- [ ] **이벤트 소싱 & CQRS**: 복잡한 도메인 처리
+  - 이벤트 스토어 구현
+  - 읽기/쓰기 모델 분리
+  - 이벤트 재생
+
+### 모니터링 & 관찰성
+- [ ] **분산 추적 (Jaeger, Zipkin)**: 마이크로서비스 디버깅
+- [ ] **메트릭 수집 (Prometheus + Grafana)**: 시스템 모니터링
+- [ ] **로그 집계 (ELK, Fluentd)**: 중앙화된 로깅
+- [ ] **APM (Application Performance Monitoring)**: 성능 분석
+
+### 보안 심화
+- [ ] **OAuth 2.0 / OIDC**: 소셜 로그인 구현
+- [ ] **API Gateway**: 중앙화된 인증/인가
+- [ ] **서비스 메시 (Istio, Linkerd)**: 서비스 간 보안 통신
+- [ ] **Vault**: 시크릿 관리
+
+### 성능 최적화
+- [ ] **로드 밸런싱**: 트래픽 분산
+- [ ] **데이터베이스 샤딩**: 수평적 확장
+- [ ] **CDN 활용**: 정적 자원 배포
+- [ ] **비동기 처리**: 백그라운드 작업
+
 ---
 
 ## 현재 폴더 구조
@@ -138,7 +230,7 @@
 ├── README.md
 ├── .golangci.yml
 └── Makefile
-project/             # 📌 통합 프로젝트 (01~08 모든 내용 포함)
+project(01~08)/             # 📌 통합 프로젝트 (01~08 모든 내용 포함)
 ├── cmd/
 │   └── main.go     # 메인 애플리케이션
 ├── internal/       # 내부 패키지

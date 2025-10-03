@@ -1,0 +1,121 @@
+run:
+  timeout: 5m
+  tests: true
+  build-tags:
+    - integration
+  skip-dirs:
+    - vendor
+    - third_party
+    - testdata
+
+output:
+  format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+  gofmt:
+    simplify: true
+
+  goimports:
+    local-prefixes: project-security
+
+  govet:
+    check-shadowing: true
+
+  golint:
+    min-confidence: 0.8
+
+  gocyclo:
+    min-complexity: 15
+
+  gocognit:
+    min-complexity: 20
+
+  staticcheck:
+    go: "1.21"
+    checks: ["all"]
+
+  stylecheck:
+    go: "1.21"
+    checks: ["all", "-ST1000", "-ST1003"]
+
+  unused:
+    check-exported: false
+
+  gosimple:
+    go: "1.21"
+    checks: ["all"]
+
+  gosec:
+    excludes:
+      - G104  # Unhandled errors
+      - G304  # File path traversal
+
+  dupl:
+    threshold: 100
+
+  funlen:
+    lines: 80
+    statements: 40
+
+  lll:
+    line-length: 120
+
+  misspell:
+    locale: US
+
+  nakedret:
+    max-func-lines: 30
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - typecheck
+    - unused
+    - bodyclose
+    - dupl
+    - funlen
+    - gochecknoinits
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - gosec
+    - lll
+    - misspell
+    - nakedret
+    - prealloc
+    - stylecheck
+    - unconvert
+    - whitespace
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gomnd
+        - funlen
+        - dupl
+        - gosec
+
+  max-issues-per-linter: 0
+  max-same-issues: 0
