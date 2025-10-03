@@ -9,8 +9,8 @@
 
 ## Gin 핵심
 - [x] Gin 설치 및 기본 서버 구동
-- [ ] 라우팅(GET, POST, PUT, DELETE)
-- [ ] Path/Query/Body 파라미터 바인딩
+- [x] 라우팅(GET, POST, PUT, DELETE)
+- [x] Path/Query/Body 파라미터 바인딩
 - [ ] 컨텍스트 사용(c.Param, c.Query, c.Bind, c.JSON)
 - [ ] 미들웨어(전역/그룹/개별)와 next() 흐름
 - [ ] 라우트 그룹, 버저닝(v1, v2)
@@ -49,27 +49,15 @@
 .
 01
 01/main.go
+01/README.md
 02
 02/main.go
+02/README.md
+03
+03/main.go
+03/README.md
 README.md
 cmd
 go.mod
 go.sum
-```
-
-## 실행 방법
-```bash
-# 01: 기본 서버
-cd gin
-go run ./01
-
-# 02: 라우팅 기본
-# (다른 터미널에서 실행하거나 01 서버를 종료한 다음 실행)
-go run ./02
-
-# 간단한 호출 예시
-curl http://localhost:8080/ping
-curl http://localhost:8080/users/123
-curl "http://localhost:8080/search?q=hello"
-curl -X POST http://localhost:8080/users -H 'Content-Type: application/json' -d '{"name":"Jin","email":"jin@example.com"}'
 ```
