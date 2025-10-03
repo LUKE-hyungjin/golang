@@ -1,0 +1,56 @@
+# 개발 환경 설정 오버라이드
+server:
+  mode: debug
+  port: 8080
+
+database:
+  host: localhost
+  port: 5432
+  username: dev_user
+  password: dev_password
+  database: dev_db
+  ssl_mode: disable
+
+redis:
+  host: localhost
+  port: 6379
+
+jwt:
+  secret: dev-secret-key-not-for-production
+  access_expiry: 1h
+  refresh_expiry: 30d
+
+email:
+  smtp:
+    host: mailhog
+    port: 1025
+    tls: false
+
+logging:
+  level: debug
+  format: text
+  output: stdout
+
+security:
+  cors:
+    allow_origins:
+      - "http://localhost:3000"
+      - "http://localhost:3001"
+      - "http://127.0.0.1:3000"
+  rate_limit:
+    enabled: false
+  ssl_redirect: false
+
+features:
+  debug_mode: true
+  enable_profiling: true
+  beta_features: true
+
+external:
+  payment_gateway:
+    base_url: https://api.stripe.com/test
+    api_key: sk_test_development_key
+  analytics:
+    base_url: https://analytics-test.example.com
+  notification:
+    base_url: https://notification-test.example.com

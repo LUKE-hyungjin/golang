@@ -1,0 +1,97 @@
+# 프로덕션 환경 설정 오버라이드
+server:
+  mode: release
+  port: 8080
+  read_timeout: 30s
+  write_timeout: 30s
+  shutdown_timeout: 60s
+
+database:
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+  username: ${DB_USERNAME}
+  password: ${DB_PASSWORD}
+  database: ${DB_NAME}
+  ssl_mode: require
+  max_open_conns: 100
+  max_idle_conns: 50
+  conn_max_lifetime: 30m
+
+redis:
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}
+  password: ${REDIS_PASSWORD}
+  pool_size: 50
+  min_idle_conns: 20
+
+jwt:
+  secret: ${JWT_SECRET}
+  issuer: production-app
+  access_expiry: 15m
+  refresh_expiry: 7d
+
+email:
+  smtp:
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT}
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    tls: true
+  from: ${EMAIL_FROM}
+  from_name: ${EMAIL_FROM_NAME}
+
+storage:
+  type: s3
+  s3:
+    region: ${AWS_REGION}
+    bucket: ${S3_BUCKET}
+    access_key_id: ${AWS_ACCESS_KEY_ID}
+    secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+
+logging:
+  level: info
+  format: json
+  output: file
+  file_path: /var/log/app/production.log
+  max_size: 500
+  max_backups: 10
+  max_age: 30
+
+security:
+  cors:
+    enabled: true
+    allow_origins:
+      - "https://app.example.com"
+      - "https://www.example.com"
+    allow_credentials: true
+  rate_limit:
+    enabled: true
+    requests_per_minute: 100
+    burst_size: 20
+  allowed_hosts:
+    - "app.example.com"
+    - "www.example.com"
+    - "api.example.com"
+  ssl_redirect: true
+  csrf_protection: true
+
+features:
+  new_dashboard: true
+  beta_features: false
+  maintenance_mode: false
+  debug_mode: false
+  enable_metrics: true
+  enable_profiling: false
+
+external:
+  payment_gateway:
+    base_url: https://api.stripe.com/v1
+    api_key: ${STRIPE_API_KEY}
+    timeout: 45s
+    retry: 5
+  analytics:
+    base_url: https://api.googleanalytics.com
+    api_key: ${GA_API_KEY}
+  notification:
+    base_url: https://api.sendgrid.com/v3
+    api_key: ${SENDGRID_API_KEY}

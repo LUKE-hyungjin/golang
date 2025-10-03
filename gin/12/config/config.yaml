@@ -1,0 +1,126 @@
+# 기본 설정 파일
+server:
+  host: 0.0.0.0
+  port: 8080
+  mode: debug
+  read_timeout: 15s
+  write_timeout: 15s
+  shutdown_timeout: 30s
+  max_header_bytes: 1048576
+  trusted_proxies:
+    - 127.0.0.1
+    - ::1
+
+database:
+  driver: postgres
+  host: localhost
+  port: 5432
+  username: dbuser
+  password: dbpass
+  database: myapp
+  ssl_mode: disable
+  max_open_conns: 25
+  max_idle_conns: 25
+  conn_max_lifetime: 5m
+
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+  db: 0
+  pool_size: 10
+  min_idle_conns: 5
+  dial_timeout: 5s
+  read_timeout: 3s
+  write_timeout: 3s
+
+jwt:
+  secret: your-secret-key-change-this-in-production
+  issuer: gin-app
+  access_expiry: 15m
+  refresh_expiry: 7d
+  signing_algorithm: HS256
+
+email:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-app-password
+    tls: true
+  from: noreply@example.com
+  from_name: Gin App
+  reply_to: support@example.com
+
+storage:
+  type: local
+  local_path: ./uploads
+  s3:
+    region: us-west-2
+    bucket: my-app-bucket
+    access_key_id: ""
+    secret_access_key: ""
+    endpoint: ""
+
+logging:
+  level: info
+  format: json
+  output: stdout
+  file_path: ./logs/app.log
+  max_size: 100
+  max_backups: 3
+  max_age: 7
+
+security:
+  cors:
+    enabled: true
+    allow_origins:
+      - "*"
+    allow_methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+    allow_headers:
+      - Authorization
+      - Content-Type
+      - X-Request-ID
+    expose_headers:
+      - X-Request-ID
+    allow_credentials: true
+    max_age: 86400
+  rate_limit:
+    enabled: true
+    requests_per_minute: 60
+    burst_size: 10
+  allowed_hosts: []
+  ssl_redirect: false
+  csrf_protection: true
+
+features:
+  new_dashboard: false
+  beta_features: false
+  maintenance_mode: false
+  debug_mode: true
+  enable_metrics: true
+  enable_profiling: false
+
+external:
+  payment_gateway:
+    base_url: https://api.stripe.com/v1
+    api_key: sk_test_your_key
+    timeout: 30s
+    retry: 3
+    headers:
+      X-API-Version: "2020-08-27"
+  analytics:
+    base_url: https://api.googleanalytics.com
+    api_key: your-ga-key
+    timeout: 10s
+    retry: 2
+  notification:
+    base_url: https://api.sendgrid.com/v3
+    api_key: your-sendgrid-key
+    timeout: 15s
+    retry: 3
