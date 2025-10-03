@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .stat-card p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-active {
+            background: #28a745;
+            color: white;
+        }
+        .badge-inactive {
+            background: #dc3545;
+            color: white;
+        }
+        .badge-admin {
+            background: #ffc107;
+            color: #333;
+        }
+        .badge-moderator {
+            background: #17a2b8;
+            color: white;
+        }
+        .badge-user {
+            background: #6c757d;
+            color: white;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .actions a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← 홈으로</a>
+        <h1>{{.title}}</h1>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>{{.totalUsers}}</h3>
+                <p>전체 사용자</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{.activeUsers}}</h3>
+                <p>활성 사용자</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{sub .totalUsers .activeUsers}}</h3>
+                <p>비활성 사용자</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>역할</th>
+                    <th>상태</th>
+                    <th>가입일</th>
+                    <th>작업</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range $index, $user := .users}}
+                <tr style="{{if isEven $index}}background: #f8f9fa;{{end}}">
+                    <td>{{$user.ID}}</td>
+                    <td><strong>{{$user.Name}}</strong></td>
+                    <td>{{$user.Email}}</td>
+                    <td>
+                        {{if eq $user.Role "admin"}}
+                            <span class="badge badge-admin">관리자</span>
+                        {{else if eq $user.Role "moderator"}}
+                            <span class="badge badge-moderator">운영자</span>
+                        {{else}}
+                            <span class="badge badge-user">사용자</span>
+                        {{end}}
+                    </td>
+                    <td>
+                        {{if $user.IsActive}}
+                            <span class="badge badge-active">활성</span>
+                        {{else}}
+                            <span class="badge badge-inactive">비활성</span>
+                        {{end}}
+                    </td>
+                    <td>{{formatDate $user.JoinedAt}}</td>
+                    <td class="actions">
+                        <a href="/users/{{$user.ID}}">보기</a>
+                        <a href="/users/{{$user.ID}}/edit">수정</a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 30px;">
+                        사용자가 없습니다.
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

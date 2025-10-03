@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Gin Static Files Example
+# This is a sample robots.txt file

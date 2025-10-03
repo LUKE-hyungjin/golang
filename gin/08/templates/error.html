@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .error-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 500px;
+        }
+        .error-code {
+            font-size: 6em;
+            color: #dc3545;
+            margin: 0;
+            font-weight: bold;
+        }
+        .error-icon {
+            font-size: 4em;
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            margin: 20px 0;
+        }
+        p {
+            color: #666;
+            margin: 20px 0;
+        }
+        .error-details {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        a:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-icon">⚠️</div>
+        <div class="error-code">{{.code}}</div>
+        <h1>{{.title}}</h1>
+        <p>{{.message}}</p>
+
+        <div class="error-details">
+            <strong>오류가 발생했습니다</strong><br>
+            잠시 후 다시 시도해주세요. 문제가 계속되면 관리자에게 문의하세요.
+        </div>
+
+        <a href="/">홈으로 돌아가기</a>
+    </div>
+</body>
+</html>

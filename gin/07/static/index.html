@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gin Static Files Example</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🗂️ Gin 정적 파일 서빙 예제</h1>
+
+        <section class="upload-section">
+            <h2>📤 파일 업로드</h2>
+            <form id="uploadForm">
+                <input type="file" id="fileInput" accept="*/*">
+                <button type="submit">업로드</button>
+            </form>
+            <div id="uploadResult"></div>
+        </section>
+
+        <section class="files-section">
+            <h2>📁 업로드된 파일 목록</h2>
+            <button onclick="loadFiles()">새로고침</button>
+            <div id="filesList"></div>
+        </section>
+
+        <section class="static-section">
+            <h2>🔗 정적 리소스 예제</h2>
+            <ul>
+                <li><a href="/static/css/style.css">CSS 파일</a></li>
+                <li><a href="/static/js/app.js">JavaScript 파일</a></li>
+                <li><a href="/static/images/sample.png">이미지 파일</a></li>
+                <li><a href="/static/robots.txt">robots.txt</a></li>
+                <li><a href="/favicon.ico">favicon.ico</a></li>
+            </ul>
+        </section>
+
+        <section class="test-section">
+            <h2>🧪 테스트 이미지</h2>
+            <img src="/static/images/sample.png" alt="Sample Image" style="max-width: 200px;">
+        </section>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

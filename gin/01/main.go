@@ -17,7 +17,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"message": "Hello, Gin!"})
 	})
 
-	if err := router.Run(":8080"); err != nil {
+	if err := router.Run(":3001"); err != nil {
 		panic(err)
 	}
 }

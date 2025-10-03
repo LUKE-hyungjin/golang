@@ -11,11 +11,11 @@
 - [x] Gin 설치 및 기본 서버 구동
 - [x] 라우팅(GET, POST, PUT, DELETE)
 - [x] Path/Query/Body 파라미터 바인딩
-- [ ] 컨텍스트 사용(c.Param, c.Query, c.Bind, c.JSON)
-- [ ] 미들웨어(전역/그룹/개별)와 next() 흐름
-- [ ] 라우트 그룹, 버저닝(v1, v2)
-- [ ] 정적 파일 서빙(Static, StaticFS)
-- [ ] 템플릿 렌더링(HTML)
+- [x] 컨텍스트 사용(c.Param, c.Query, c.Bind, c.JSON)
+- [x] 미들웨어(전역/그룹/개별)와 next() 흐름
+- [x] 라우트 그룹, 버저닝(v1, v2)
+- [x] 정적 파일 서빙(Static, StaticFS)
+- [x] 템플릿 렌더링(HTML)
 
 ## 에러 처리 & 로깅
 - [ ] HTTP 상태코드와 에러 응답 규약
@@ -47,17 +47,79 @@
 ## 현재 폴더 구조
 ```
 .
-01
-01/main.go
-01/README.md
-02
-02/main.go
-02/README.md
-03
-03/main.go
-03/README.md
+01/                  # 기본 서버 구동
+├── main.go
+└── README.md
+02/                  # 라우팅 기본
+├── main.go
+└── README.md
+03/                  # 파라미터 바인딩
+├── main.go
+└── README.md
+04/                  # Context 사용
+├── main.go
+└── README.md
+05/                  # 미들웨어
+├── main.go
+└── README.md
+06/                  # 라우트 그룹과 버저닝
+├── main.go
+└── README.md
+07/                  # 정적 파일 서빙
+├── main.go
+├── README.md
+├── static/
+│   ├── index.html
+│   ├── css/
+│   ├── js/
+│   └── ...
+└── uploads/
+08/                  # 템플릿 렌더링
+├── main.go
+├── README.md
+└── templates/
+    ├── index.html
+    ├── users.html
+    ├── products.html
+    └── ...
 README.md
-cmd
 go.mod
 go.sum
 ```
+
+## 실행 방법
+```bash
+# gin 폴더로 이동
+cd gin
+
+# 각 예제 실행 (포트 8080 사용)
+go run ./01  # 01: 기본 서버
+go run ./02  # 02: 라우팅 기본
+go run ./03  # 03: 파라미터 바인딩
+go run ./04  # 04: Context 사용
+go run ./05  # 05: 미들웨어
+go run ./06  # 06: 라우트 그룹과 버저닝
+go run ./07  # 07: 정적 파일 서빙
+go run ./08  # 08: 템플릿 렌더링
+
+# 브라우저에서 접속
+http://localhost:8080
+
+# API 테스트 예시
+curl http://localhost:8080/ping
+curl http://localhost:8080/users/123
+curl "http://localhost:8080/search?q=hello"
+curl -X POST http://localhost:8080/users -H 'Content-Type: application/json' -d '{"name":"Jin","email":"jin@example.com"}'
+```
+
+## 학습 순서
+1. **01 - 기본 서버**: Gin 설치와 Hello World
+2. **02 - 라우팅**: HTTP 메서드별 라우팅과 RESTful API
+3. **03 - 파라미터 바인딩**: Path, Query, Body 파라미터 처리
+4. **04 - Context**: gin.Context의 모든 기능
+5. **05 - 미들웨어**: 인증, 로깅, CORS 등 미들웨어 구현
+6. **06 - 라우트 그룹**: API 버저닝과 그룹화
+7. **07 - 정적 파일**: 파일 업로드/다운로드, SPA 지원
+8. **08 - 템플릿**: HTML 템플릿 렌더링과 웹 애플리케이션
+
+각 폴더의 README.md에서 상세한 설명과 테스트 방법을 확인할 수 있습니다.
