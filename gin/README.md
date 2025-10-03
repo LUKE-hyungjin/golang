@@ -28,9 +28,9 @@
 - [x] 실행 모드(release/debug/test)
 
 ## 데이터 계층
-- [ ] GORM(or sqlx) 연결 및 CRUD
-- [ ] 마이그레이션과 시드 데이터
-- [ ] 트랜잭션, 컨텍스트 타임아웃
+- [x] GORM(or sqlx) 연결 및 CRUD
+- [x] 마이그레이션과 시드 데이터
+- [x] 트랜잭션, 컨텍스트 타임아웃
 
 ## 보안
 - [ ] CORS 설정
@@ -106,6 +106,18 @@
 14/                  # 실행 모드 (Release/Debug/Test)
 ├── main.go
 └── README.md
+15/                  # GORM과 SQLite CRUD
+├── main.go
+├── README.md
+└── blog.db         # SQLite 데이터베이스 (자동 생성)
+16/                  # 마이그레이션과 시드 데이터
+├── main.go
+├── README.md
+└── blog.db         # SQLite 데이터베이스 (자동 생성)
+17/                  # 트랜잭션과 컨텍스트 타임아웃
+├── main.go
+├── README.md
+└── transaction.db  # SQLite 데이터베이스 (자동 생성)
 project/             # 📌 통합 프로젝트 (01~08 모든 내용 포함)
 ├── cmd/
 │   └── main.go     # 메인 애플리케이션
@@ -147,6 +159,9 @@ go run ./11  # 11: 로깅 미들웨어
 go run ./12  # 12: 환경변수/설정파일 로딩 (Viper)
 go run ./13  # 13: 의존성 주입 (DI)
 go run ./14  # 14: 실행 모드 (Release/Debug/Test)
+go run ./15  # 15: GORM과 SQLite CRUD
+go run ./16  # 16: 마이그레이션과 시드 데이터
+go run ./17  # 17: 트랜잭션과 컨텍스트 타임아웃
 
 # 브라우저에서 접속
 http://localhost:8080
@@ -179,6 +194,11 @@ curl -X POST http://localhost:8080/users -H 'Content-Type: application/json' -d 
 12. **12 - 환경변수/설정파일**: Viper를 사용한 설정 관리와 환경별 구성
 13. **13 - 의존성 주입**: 인터페이스 기반 설계와 팩토리 패턴
 14. **14 - 실행 모드**: Debug/Release/Test 모드별 최적화
+
+### 데이터 계층 (15~17)
+15. **15 - GORM과 SQLite CRUD**: ORM을 사용한 데이터베이스 작업과 Repository 패턴
+16. **16 - 마이그레이션과 시드 데이터**: 스키마 버전 관리와 테스트 데이터 생성
+17. **17 - 트랜잭션과 컨텍스트 타임아웃**: ACID 트랜잭션과 동시성 제어
 
 ### 🚀 통합 프로젝트
 **project 폴더**: 01~08의 모든 내용을 통합한 실전 블로그/커뮤니티 플랫폼
