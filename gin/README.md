@@ -33,9 +33,9 @@
 - [x] 트랜잭션, 컨텍스트 타임아웃
 
 ## 보안
-- [ ] CORS 설정
-- [ ] 인증/인가(JWT, 세션) 미들웨어
-- [ ] 입력 검증(binding + validator)
+- [x] CORS 설정
+- [x] 인증/인가(JWT, 세션) 미들웨어
+- [x] 입력 검증(binding + validator)
 
 ## 테스트 & 품질
 - [ ] 핸들러 유닛 테스트(httptest)
@@ -118,6 +118,15 @@
 ├── main.go
 ├── README.md
 └── transaction.db  # SQLite 데이터베이스 (자동 생성)
+18/                  # CORS 설정
+├── main.go
+└── README.md
+19/                  # JWT 인증 미들웨어
+├── main.go
+└── README.md
+20/                  # 입력 검증 (Binding + Validator)
+├── main.go
+└── README.md
 project/             # 📌 통합 프로젝트 (01~08 모든 내용 포함)
 ├── cmd/
 │   └── main.go     # 메인 애플리케이션
@@ -162,6 +171,9 @@ go run ./14  # 14: 실행 모드 (Release/Debug/Test)
 go run ./15  # 15: GORM과 SQLite CRUD
 go run ./16  # 16: 마이그레이션과 시드 데이터
 go run ./17  # 17: 트랜잭션과 컨텍스트 타임아웃
+go run ./18  # 18: CORS 설정
+go run ./19  # 19: JWT 인증 미들웨어
+go run ./20  # 20: 입력 검증
 
 # 브라우저에서 접속
 http://localhost:8080
@@ -199,6 +211,11 @@ curl -X POST http://localhost:8080/users -H 'Content-Type: application/json' -d 
 15. **15 - GORM과 SQLite CRUD**: ORM을 사용한 데이터베이스 작업과 Repository 패턴
 16. **16 - 마이그레이션과 시드 데이터**: 스키마 버전 관리와 테스트 데이터 생성
 17. **17 - 트랜잭션과 컨텍스트 타임아웃**: ACID 트랜잭션과 동시성 제어
+
+### 보안 (18~20)
+18. **18 - CORS 설정**: Cross-Origin Resource Sharing 구성과 환경별 설정
+19. **19 - JWT 인증 미들웨어**: Access/Refresh 토큰과 역할 기반 접근 제어
+20. **20 - 입력 검증**: 구조체 태그 검증과 커스텀 검증자
 
 ### 🚀 통합 프로젝트
 **project 폴더**: 01~08의 모든 내용을 통합한 실전 블로그/커뮤니티 플랫폼
