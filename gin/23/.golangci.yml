@@ -1,0 +1,348 @@
+# golangci-lint configuration file
+
+# Options for analysis running
+run:
+  # Timeout for analysis
+  timeout: 5m
+
+  # Exit code when at least one issue was found
+  issues-exit-code: 1
+
+  # Include test files
+  tests: true
+
+  # List of build tags
+  build-tags:
+    - integration
+
+  # Which dirs to skip
+  skip-dirs:
+    - vendor
+    - third_party
+    - testdata
+
+  # Which files to skip
+  skip-files:
+    - ".*\\.pb\\.go$"
+    - ".*\\.gen\\.go$"
+
+# Output configuration options
+output:
+  # Format of output
+  format: colored-line-number
+
+  # Print lines of code with issue
+  print-issued-lines: true
+
+  # Print linter name in the end of issue text
+  print-linter-name: true
+
+  # Make issues output unique by line
+  uniq-by-line: true
+
+  # Sort results by: filepath, line and column
+  sort-results: true
+
+# All available settings of specific linters
+linters-settings:
+  # Error checking
+  errcheck:
+    # Report about not checking of errors in type assertions
+    check-type-assertions: true
+
+    # Report about assignment of errors to blank identifier
+    check-blank: true
+
+  # Go fmt
+  gofmt:
+    # Simplify code
+    simplify: true
+
+  # Go imports
+  goimports:
+    # Put imports beginning with prefix after 3rd-party packages
+    local-prefixes: github.com/yourusername/yourproject
+
+  # Go vet
+  govet:
+    # Report about shadowed variables
+    check-shadowing: true
+
+    # Settings per analyzer
+    settings:
+      printf:
+        funcs:
+          - (github.com/gin-gonic/gin.Context).JSON
+          - (github.com/gin-gonic/gin.Context).String
+
+  # Linter for Go source code
+  golint:
+    # Minimal confidence for issues
+    min-confidence: 0.8
+
+  # Go cyclomatic complexity
+  gocyclo:
+    # Minimal code complexity to report
+    min-complexity: 15
+
+  # Go cognitive complexity
+  gocognit:
+    # Minimal code complexity to report
+    min-complexity: 20
+
+  # Staticcheck
+  staticcheck:
+    # Go version to target
+    go: "1.21"
+
+    # SAxxxx checks
+    checks: ["all"]
+
+  # Stylecheck
+  stylecheck:
+    # Go version to target
+    go: "1.21"
+
+    # STxxxx checks
+    checks: ["all", "-ST1000", "-ST1003"]
+
+    # Initialisms to accept
+    initialisms: ["ACL", "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "JWT", "QPS", "RAM", "RPC", "SLA", "SMTP", "SQL", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "GID", "UID", "UUID", "URI", "URL", "UTF8", "VM", "XML", "XMPP", "XSRF", "XSS"]
+
+  # Unused
+  unused:
+    # Treat code as a program (not a library)
+    check-exported: false
+
+  # Gosimple
+  gosimple:
+    # Go version to target
+    go: "1.21"
+
+    # Sxxxx checks
+    checks: ["all"]
+
+  # Gosec - security checks
+  gosec:
+    # To specify a set of rules to explicitly exclude
+    excludes:
+      - G104  # Unhandled errors (covered by errcheck)
+
+  # Duplication threshold
+  dupl:
+    # Tokens count to trigger issue
+    threshold: 100
+
+  # Check function arguments count
+  funlen:
+    lines: 100
+    statements: 50
+
+  # Whitespace linter
+  whitespace:
+    multi-if: true
+    multi-func: true
+
+  # WSL - Whitespace linter
+  wsl:
+    # Allow declarations and assignments to be cuddled
+    allow-assign-and-anything: false
+    allow-multiline-assign: true
+    allow-cuddle-declarations: false
+    allow-trailing-comment: true
+
+  # Go lint
+  lll:
+    # Max line length
+    line-length: 120
+
+    # Tab width in spaces
+    tab-width: 1
+
+  # Misspell
+  misspell:
+    # Locale to use
+    locale: US
+
+  # Nakedret
+  nakedret:
+    # Max func length to check for naked returns
+    max-func-lines: 30
+
+  # Prealloc
+  prealloc:
+    # Report preallocation suggestions only on simple loops
+    simple: true
+    range-loops: true
+    for-loops: true
+
+  # Go critic
+  gocritic:
+    # Which checks should be enabled
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+
+    # Which checks should be disabled
+    disabled-checks:
+      - dupImport
+      - ifElseChain
+      - octalLiteral
+      - whyNoLint
+      - wrapperFunc
+
+  # Gofumpt - stricter gofmt
+  gofumpt:
+    # Select the Go version
+    lang-version: "1.21"
+
+    # Choose whether to use the extra rules
+    extra-rules: true
+
+  # Revive
+  revive:
+    # Sets the default failure confidence
+    confidence: 0.8
+
+    # Sets the error code for failures
+    severity: warning
+
+    # Enable all available rules
+    enable-all-rules: false
+
+    rules:
+      - name: blank-imports
+      - name: context-as-argument
+      - name: context-keys-type
+      - name: dot-imports
+      - name: error-return
+      - name: error-strings
+      - name: error-naming
+      - name: exported
+      - name: if-return
+      - name: increment-decrement
+      - name: var-naming
+      - name: var-declaration
+      - name: package-comments
+      - name: range
+      - name: receiver-naming
+      - name: time-naming
+      - name: unexported-return
+      - name: indent-error-flow
+      - name: errorf
+      - name: empty-block
+      - name: superfluous-else
+      - name: unreachable-code
+      - name: redefines-builtin-id
+
+# Linters to enable/disable
+linters:
+  # Disable all linters
+  disable-all: true
+
+  # Enable specific linters
+  enable:
+    # Default linters
+    - errcheck        # Checking for unchecked errors
+    - gosimple        # Simplifying code
+    - govet          # Go vet
+    - ineffassign    # Detecting ineffectual assignments
+    - staticcheck    # Staticcheck
+    - typecheck      # Type checking
+    - unused         # Checking for unused code
+
+    # Additional linters
+    - bodyclose      # Checks whether HTTP response body is closed
+    - dupl           # Code clone detection
+    - exhaustive     # Check exhaustiveness of enum switch statements
+    - funlen         # Check for long functions
+    - gochecknoinits # Check that no init functions are present
+    - goconst        # Find repeated strings that could be constants
+    - gocritic       # The most opinionated Go source code linter
+    - gocyclo        # Cyclomatic complexity
+    - gofmt          # Go formatting
+    - goimports      # Go imports formatting
+    - gomnd          # Detect magic numbers
+    - gosec          # Security problems
+    - lll            # Long line detection
+    - misspell       # Misspelled English words
+    - nakedret       # Naked returns
+    - prealloc       # Find slice declarations that could potentially be preallocated
+    - revive         # Fast, configurable, extensible linter
+    - stylecheck     # Stylecheck
+    - unconvert      # Unnecessary type conversions
+    - whitespace     # Whitespace checks
+    - wsl            # Whitespace linter
+
+    # Optional linters (uncomment to enable)
+    # - gofumpt        # Stricter gofmt
+    # - godot          # Check comments end in period
+    # - godox          # Tool for detection of FIXME, TODO and other comments
+    # - goerr113       # Error wrapping
+    # - goprintffuncname # Check printf-like functions are named with 'f' at the end
+    # - noctx          # Finds sending http request without context.Context
+    # - nlreturn       # Checks for a new line before return and branch statements
+    # - testpackage    # Makes you use a separate _test package
+
+# Issues configuration
+issues:
+  # List of regexps of issue texts to exclude
+  exclude:
+    - "Error return value of .((os\\.)?std(out|err)\\..*|.*Close|.*Flush|os\\.Remove(All)?|.*print(f|ln)?|os\\.(Un)?Setenv). is not checked"
+    - "exported (type|method|function) (.+) should have comment or be unexported"
+    - "ST1000: at least one file in a package should have a package comment"
+
+  # Excluding configuration per-path, per-linter, per-text and per-source
+  exclude-rules:
+    # Exclude some linters from running on tests files
+    - path: _test\.go
+      linters:
+        - gomnd
+        - funlen
+        - dupl
+        - gosec
+
+    # Exclude known linters from partially hard-vendored code
+    - path: internal/hmac/
+      text: "weak cryptographic primitive"
+      linters:
+        - gosec
+
+    # Exclude some staticcheck messages
+    - linters:
+        - staticcheck
+      text: "SA9003:"
+
+    # Exclude lll issues for long lines with go:generate
+    - linters:
+        - lll
+      source: "^//go:generate "
+
+  # Maximum issues count per one linter
+  max-issues-per-linter: 0
+
+  # Maximum count of issues with the same text
+  max-same-issues: 0
+
+  # Show only new issues
+  new: false
+
+  # Fix found issues (if it's supported by the linter)
+  fix: false
+
+# Severity configuration
+severity:
+  # Default value is empty string
+  default-severity: warning
+
+  # The default value is false
+  case-sensitive: false
+
+  # Rules to determine the severity
+  rules:
+    - linters:
+        - dupl
+      severity: info

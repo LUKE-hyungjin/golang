@@ -38,9 +38,9 @@
 - [x] 입력 검증(binding + validator)
 
 ## 테스트 & 품질
-- [ ] 핸들러 유닛 테스트(httptest)
-- [ ] 통합 테스트(테스트 라우터 구성)
-- [ ] 린팅(golangci-lint)과 포맷팅(go fmt)
+- [x] 핸들러 유닛 테스트(httptest)
+- [x] 통합 테스트(테스트 라우터 구성)
+- [x] 린팅(golangci-lint)과 포맷팅(go fmt)
 
 ---
 
@@ -127,6 +127,17 @@
 20/                  # 입력 검증 (Binding + Validator)
 ├── main.go
 └── README.md
+21/                  # 핸들러 유닛 테스트 (httptest)
+├── main.go
+└── README.md
+22/                  # 통합 테스트
+├── main.go
+└── README.md
+23/                  # 린팅과 포맷팅 (golangci-lint)
+├── main.go
+├── README.md
+├── .golangci.yml
+└── Makefile
 project/             # 📌 통합 프로젝트 (01~08 모든 내용 포함)
 ├── cmd/
 │   └── main.go     # 메인 애플리케이션
@@ -174,6 +185,9 @@ go run ./17  # 17: 트랜잭션과 컨텍스트 타임아웃
 go run ./18  # 18: CORS 설정
 go run ./19  # 19: JWT 인증 미들웨어
 go run ./20  # 20: 입력 검증
+go run ./21  # 21: 핸들러 유닛 테스트
+go run ./22  # 22: 통합 테스트
+go run ./23  # 23: 린팅과 포맷팅
 
 # 브라우저에서 접속
 http://localhost:8080
@@ -216,6 +230,11 @@ curl -X POST http://localhost:8080/users -H 'Content-Type: application/json' -d 
 18. **18 - CORS 설정**: Cross-Origin Resource Sharing 구성과 환경별 설정
 19. **19 - JWT 인증 미들웨어**: Access/Refresh 토큰과 역할 기반 접근 제어
 20. **20 - 입력 검증**: 구조체 태그 검증과 커스텀 검증자
+
+### 테스트 & 품질 (21~23)
+21. **21 - 핸들러 유닛 테스트**: httptest를 사용한 HTTP 핸들러 테스트
+22. **22 - 통합 테스트**: 데이터베이스와 전체 스택을 포함한 통합 테스트
+23. **23 - 린팅과 포맷팅**: golangci-lint와 코드 품질 도구
 
 ### 🚀 통합 프로젝트
 **project 폴더**: 01~08의 모든 내용을 통합한 실전 블로그/커뮤니티 플랫폼
