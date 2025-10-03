@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>📝 Blog Platform</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/posts">Posts</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Welcome to Blog Community Platform</h1>
+            <p>A comprehensive Gin framework demonstration combining all features from lessons 01-08</p>
+            <div class="cta-buttons">
+                <a href="/posts" class="btn btn-primary">Browse Posts</a>
+                <a href="/register" class="btn btn-secondary">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <h2>Features Implemented</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Basic Server Setup</h3>
+                    <p>Clean Gin server configuration with proper routing (Lesson 01)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Full CRUD Operations</h3>
+                    <p>Complete Create, Read, Update, Delete for blog posts (Lesson 02)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Parameter Binding</h3>
+                    <p>JSON, form, and query parameter handling (Lesson 03)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Context Management</h3>
+                    <p>Proper context usage throughout the application (Lesson 04)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Middleware Stack</h3>
+                    <p>Auth, logging, CORS, and rate limiting (Lesson 05)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>API Versioning</h3>
+                    <p>v1 and v2 APIs with route groups (Lesson 06)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>Static File Serving</h3>
+                    <p>CSS, JavaScript, and uploaded images (Lesson 07)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Template Rendering</h3>
+                    <p>Dynamic HTML pages with Go templates (Lesson 08)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="api-info">
+        <div class="container">
+            <h2>API Endpoints</h2>
+            <div class="api-grid">
+                <div class="api-card">
+                    <h3>API v1</h3>
+                    <ul>
+                        <li><code>GET /api/v1/health</code> - Health check</li>
+                        <li><code>POST /api/v1/auth/register</code> - Register user</li>
+                        <li><code>POST /api/v1/auth/login</code> - Login</li>
+                        <li><code>GET /api/v1/posts</code> - List posts</li>
+                        <li><code>POST /api/v1/posts</code> - Create post 🔒</li>
+                        <li><code>PUT /api/v1/posts/:id</code> - Update post 🔒</li>
+                        <li><code>DELETE /api/v1/posts/:id</code> - Delete post 🔒</li>
+                    </ul>
+                </div>
+                <div class="api-card">
+                    <h3>API v2</h3>
+                    <ul>
+                        <li><code>GET /api/v2/health</code> - Enhanced health check</li>
+                        <li><code>GET /api/v2/posts</code> - Enhanced post listing</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="note">🔒 = Authentication required. Use <code>Authorization: Bearer &lt;token&gt;</code> header</p>
+        </div>
+    </section>
+
+    <section class="test-credentials">
+        <div class="container">
+            <h2>Test Credentials</h2>
+            <div class="credentials-grid">
+                <div class="credential-card">
+                    <h3>Admin Account</h3>
+                    <p><strong>Username:</strong> admin</p>
+                    <p><strong>Password:</strong> password123</p>
+                    <p><strong>Token:</strong> admin-token-456</p>
+                </div>
+                <div class="credential-card">
+                    <h3>User Account</h3>
+                    <p><strong>Username:</strong> user</p>
+                    <p><strong>Password:</strong> password123</p>
+                    <p><strong>Token:</strong> valid-token-123</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; {{ .year }} Blog Community Platform. Built with Gin Framework.</p>
+            <p>A comprehensive demonstration of Gin features (Lessons 01-08)</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

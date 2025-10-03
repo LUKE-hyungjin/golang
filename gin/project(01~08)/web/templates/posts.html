@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>📝 Blog Platform</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/posts" class="active">Posts</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <header class="page-header">
+            <h1>📚 Blog Posts</h1>
+            <p>Explore our community's latest articles and discussions</p>
+        </header>
+
+        <div class="posts-container">
+            {{ range .posts }}
+            <article class="post-card">
+                {{ if .ImageURL }}
+                <div class="post-image">
+                    <img src="{{ .ImageURL }}" alt="{{ .Title }}">
+                </div>
+                {{ end }}
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="category">{{ .Category }}</span>
+                        <span class="date">{{ timeAgo .CreatedAt }}</span>
+                    </div>
+                    <h2><a href="/posts/{{ .ID }}">{{ .Title }}</a></h2>
+                    <p class="post-excerpt">{{ .Content }}</p>
+                    <div class="post-footer">
+                        <div class="post-author">
+                            {{ if .Author }}
+                            <span>By {{ .Author.Username }}</span>
+                            {{ end }}
+                        </div>
+                        <div class="post-stats">
+                            <span>👁️ {{ .ViewCount }} views</span>
+                            {{ if .Tags }}
+                            <div class="tags">
+                                {{ range .Tags }}
+                                <span class="tag">#{{ . }}</span>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    <a href="/posts/{{ .ID }}" class="btn btn-primary btn-sm">Read More</a>
+                </div>
+            </article>
+            {{ else }}
+            <div class="empty-state">
+                <h3>No posts available</h3>
+                <p>Be the first to create a post!</p>
+                <a href="/register" class="btn btn-primary">Get Started</a>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blog Community Platform. Built with Gin Framework.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

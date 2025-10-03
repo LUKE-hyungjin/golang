@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>📝 Blog Platform - Admin</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/posts">Posts</a></li>
+                <li><a href="/admin/dashboard" class="active">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <header class="page-header">
+            <h1>🔧 Admin Dashboard</h1>
+            <p>Manage your blog platform</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-info">
+                    <h3>{{ .stats.total_users }}</h3>
+                    <p>Total Users</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-info">
+                    <h3>{{ .stats.total_posts }}</h3>
+                    <p>Total Posts</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💬</div>
+                <div class="stat-info">
+                    <h3>{{ .stats.total_comments }}</h3>
+                    <p>Total Comments</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-sections">
+            <section class="admin-section">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Create New Post</button>
+                    <button class="btn btn-secondary">Manage Users</button>
+                    <button class="btn btn-secondary">View Reports</button>
+                    <button class="btn btn-secondary">Settings</button>
+                </div>
+            </section>
+
+            <section class="admin-section">
+                <h2>Recent Activity</h2>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <span class="activity-time">2 hours ago</span>
+                        <span class="activity-description">New user registered: newuser123</span>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-time">5 hours ago</span>
+                        <span class="activity-description">Post published: Getting Started with Gin</span>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-time">1 day ago</span>
+                        <span class="activity-description">Comment moderated on post #5</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blog Community Platform. Built with Gin Framework.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

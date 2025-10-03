@@ -82,6 +82,22 @@
     ├── users.html
     ├── products.html
     └── ...
+project/             # 📌 통합 프로젝트 (01~08 모든 내용 포함)
+├── cmd/
+│   └── main.go     # 메인 애플리케이션
+├── internal/       # 내부 패키지
+│   ├── handlers/   # HTTP 핸들러
+│   ├── middleware/ # 미들웨어
+│   └── models/     # 데이터 모델
+├── web/           # 웹 리소스
+│   ├── templates/ # HTML 템플릿
+│   └── static/    # 정적 파일
+├── Documentation/ # 프로젝트 문서
+│   ├── README.md
+│   ├── API.md
+│   └── QUICKSTART.md
+├── Makefile
+└── go.mod
 README.md
 go.mod
 go.sum
@@ -121,5 +137,23 @@ curl -X POST http://localhost:8080/users -H 'Content-Type: application/json' -d 
 6. **06 - 라우트 그룹**: API 버저닝과 그룹화
 7. **07 - 정적 파일**: 파일 업로드/다운로드, SPA 지원
 8. **08 - 템플릿**: HTML 템플릿 렌더링과 웹 애플리케이션
+
+### 🚀 통합 프로젝트
+**project 폴더**: 01~08의 모든 내용을 통합한 실전 블로그/커뮤니티 플랫폼
+- 사용자 인증 시스템
+- 블로그 포스트 CRUD
+- 댓글 시스템
+- 파일 업로드
+- 관리자 대시보드
+- API v1/v2 버저닝
+- 완전한 웹 인터페이스
+
+```bash
+# 통합 프로젝트 실행
+cd gin/project
+make install
+make run
+# http://localhost:8080 접속
+```
 
 각 폴더의 README.md에서 상세한 설명과 테스트 방법을 확인할 수 있습니다.

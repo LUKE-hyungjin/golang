@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>📝 Blog Platform</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/posts">Posts</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <article class="post-detail">
+            <header class="post-header">
+                <div class="post-meta">
+                    <span class="category">{{ .post.Category }}</span>
+                    <span class="date">{{ formatDateTime .post.CreatedAt }}</span>
+                    <span class="views">👁️ {{ .post.ViewCount }} views</span>
+                </div>
+                <h1>{{ .post.Title }}</h1>
+                <div class="post-author-info">
+                    {{ if .post.Author }}
+                    <p>By <strong>{{ .post.Author.Username }}</strong></p>
+                    {{ end }}
+                </div>
+                {{ if .post.Tags }}
+                <div class="tags">
+                    {{ range .post.Tags }}
+                    <span class="tag">#{{ . }}</span>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </header>
+
+            {{ if .post.ImageURL }}
+            <div class="post-featured-image">
+                <img src="{{ .post.ImageURL }}" alt="{{ .post.Title }}">
+            </div>
+            {{ end }}
+
+            <div class="post-body">
+                <p>{{ .post.Content }}</p>
+            </div>
+        </article>
+
+        <section class="comments-section">
+            <h2>💬 Comments ({{ len .comments }})</h2>
+
+            <div class="comment-form">
+                <h3>Add a Comment</h3>
+                <p class="login-notice">Please <a href="/login">login</a> to comment.</p>
+            </div>
+
+            <div class="comments-list">
+                {{ range .comments }}
+                <div class="comment">
+                    <div class="comment-header">
+                        {{ if .Author }}
+                        <strong>{{ .Author.Username }}</strong>
+                        {{ end }}
+                        <span class="comment-date">{{ timeAgo .CreatedAt }}</span>
+                    </div>
+                    <div class="comment-body">
+                        <p>{{ .Content }}</p>
+                    </div>
+                </div>
+                {{ else }}
+                <p class="no-comments">No comments yet. Be the first to comment!</p>
+                {{ end }}
+            </div>
+        </section>
+
+        <div class="post-actions">
+            <a href="/posts" class="btn btn-secondary">← Back to Posts</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blog Community Platform. Built with Gin Framework.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
