@@ -53,7 +53,7 @@ go run main.go
 
 **모든 사용자 조회:**
 ```bash
-curl http://localhost:8080/users
+curl http://localhost:3001/users
 
 # 응답:
 # []  (초기 상태)
@@ -61,7 +61,7 @@ curl http://localhost:8080/users
 
 **새 사용자 생성:**
 ```bash
-curl -X POST http://localhost:8080/users \
+curl -X POST http://localhost:3001/users \
   -H "Content-Type: application/json" \
   -d '{"name":"홍길동","email":"hong@example.com"}'
 
@@ -78,7 +78,7 @@ curl -X POST http://localhost:8080/users \
 
 **특정 사용자 조회:**
 ```bash
-curl http://localhost:8080/users/1
+curl http://localhost:3001/users/1
 
 # 응답:
 # {
@@ -90,7 +90,7 @@ curl http://localhost:8080/users/1
 
 **사용자 정보 수정 (PUT - 전체 수정):**
 ```bash
-curl -X PUT http://localhost:8080/users/1 \
+curl -X PUT http://localhost:3001/users/1 \
   -H "Content-Type: application/json" \
   -d '{"name":"김철수","email":"kim@example.com"}'
 
@@ -107,7 +107,7 @@ curl -X PUT http://localhost:8080/users/1 \
 
 **사용자 정보 부분 수정 (PATCH):**
 ```bash
-curl -X PATCH http://localhost:8080/users/1 \
+curl -X PATCH http://localhost:3001/users/1 \
   -H "Content-Type: application/json" \
   -d '{"email":"new@example.com"}'
 
@@ -124,7 +124,7 @@ curl -X PATCH http://localhost:8080/users/1 \
 
 **사용자 삭제:**
 ```bash
-curl -X DELETE http://localhost:8080/users/1
+curl -X DELETE http://localhost:3001/users/1
 
 # 응답: 204 No Content (본문 없음)
 ```
@@ -191,34 +191,34 @@ defer mu.Unlock()
 ### 전체 CRUD 플로우 테스트
 ```bash
 # 1. 초기 상태 확인
-curl http://localhost:8080/users
+curl http://localhost:3001/users
 
 # 2. 사용자 3명 생성
-curl -X POST http://localhost:8080/users \
+curl -X POST http://localhost:3001/users \
   -H "Content-Type: application/json" \
   -d '{"name":"사용자1","email":"user1@test.com"}'
 
-curl -X POST http://localhost:8080/users \
+curl -X POST http://localhost:3001/users \
   -H "Content-Type: application/json" \
   -d '{"name":"사용자2","email":"user2@test.com"}'
 
-curl -X POST http://localhost:8080/users \
+curl -X POST http://localhost:3001/users \
   -H "Content-Type: application/json" \
   -d '{"name":"사용자3","email":"user3@test.com"}'
 
 # 3. 모든 사용자 확인
-curl http://localhost:8080/users
+curl http://localhost:3001/users
 
 # 4. 특정 사용자 수정
-curl -X PUT http://localhost:8080/users/2 \
+curl -X PUT http://localhost:3001/users/2 \
   -H "Content-Type: application/json" \
   -d '{"name":"수정된사용자2","email":"modified@test.com"}'
 
 # 5. 사용자 삭제
-curl -X DELETE http://localhost:8080/users/1
+curl -X DELETE http://localhost:3001/users/1
 
 # 6. 최종 상태 확인
-curl http://localhost:8080/users
+curl http://localhost:3001/users
 ```
 
 ## 🔍 트러블슈팅
@@ -236,7 +236,7 @@ curl http://localhost:8080/users
 ### 404 Not Found 에러
 ```bash
 # ID 존재 여부 확인
-curl http://localhost:8080/users  # 모든 사용자 목록 확인
+curl http://localhost:3001/users  # 모든 사용자 목록 확인
 
 # URL 경로 확인
 # 올바른 경로: /users/1
