@@ -4,11 +4,11 @@
 Gin 프레임워크의 라우팅 시스템을 학습합니다. GET, POST, PUT, DELETE 등 다양한 HTTP 메서드별 라우팅 구현과 기본적인 RESTful API 패턴을 익힙니다.
 
 ## 🎯 학습 목표
-- HTTP 메서드별 라우팅 구현 (GET, POST, PUT, DELETE, PATCH)
+- HTTP 메서드별 라우팅 구현 (GET, POST, PUT, DELETE)
 - RESTful API 설계 원칙 이해
 - 간단한 CRUD 작업 구현
 - HTTP 상태 코드 적절한 사용
-- 메모리 기반 데이터 저장소 구현
+- 메모리 기반 데이터 저장소 구현 (슬라이스)
 
 ## 📂 파일 구조
 ```
@@ -21,9 +21,8 @@ Gin 프레임워크의 라우팅 시스템을 학습합니다. GET, POST, PUT, D
 ### 주요 구성 요소
 
 1. **User 구조체**: 사용자 데이터 모델
-2. **메모리 저장소**: `map`을 사용한 간단한 데이터 저장
-3. **뮤텍스**: 동시성 제어를 위한 sync.RWMutex
-4. **RESTful 라우팅**: 리소스 기반 URL 설계
+2. **메모리 저장소**: `[]User` 슬라이스 기반 저장
+3. **RESTful 라우팅**: 리소스 기반 URL 설계
 
 ### API 엔드포인트
 
@@ -34,7 +33,6 @@ Gin 프레임워크의 라우팅 시스템을 학습합니다. GET, POST, PUT, D
 | POST | /users | 새 사용자 생성 | 201 Created / 400 Bad Request |
 | PUT | /users/:id | 사용자 정보 수정 | 200 OK / 404 Not Found |
 | DELETE | /users/:id | 사용자 삭제 | 204 No Content / 404 Not Found |
-| PATCH | /users/:id | 사용자 부분 수정 | 200 OK / 404 Not Found |
 
 ## 🚀 실행 방법
 
@@ -96,28 +94,10 @@ curl -X PUT http://localhost:3001/users/1 \
 
 # 응답:
 # {
-#   "message": "User updated",
 #   "user": {
 #     "id": "1",
 #     "name": "김철수",
 #     "email": "kim@example.com"
-#   }
-# }
-```
-
-**사용자 정보 부분 수정 (PATCH):**
-```bash
-curl -X PATCH http://localhost:3001/users/1 \
-  -H "Content-Type: application/json" \
-  -d '{"email":"new@example.com"}'
-
-# 응답:
-# {
-#   "message": "User partially updated",
-#   "user": {
-#     "id": "1",
-#     "name": "김철수",
-#     "email": "new@example.com"
 #   }
 # }
 ```
@@ -148,42 +128,8 @@ r.POST("/users", createUser)
 // PUT: 리소스 전체 수정 (Update - Full)
 r.PUT("/users/:id", updateUser)
 
-// PATCH: 리소스 부분 수정 (Update - Partial)
-r.PATCH("/users/:id", patchUser)
-
 // DELETE: 리소스 삭제 (Delete)
 r.DELETE("/users/:id", deleteUser)
-```
-
-### 3. 상태 코드 사용
-```go
-// 200 OK: 요청 성공
-c.JSON(http.StatusOK, data)
-
-// 201 Created: 리소스 생성 성공
-c.JSON(http.StatusCreated, newResource)
-
-// 204 No Content: 성공했지만 반환할 내용 없음
-c.Status(http.StatusNoContent)
-
-// 400 Bad Request: 잘못된 요청
-c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid data"})
-
-// 404 Not Found: 리소스를 찾을 수 없음
-c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
-```
-
-### 4. 동시성 제어
-```go
-var mu sync.RWMutex  // 읽기/쓰기 뮤텍스
-
-// 읽기 작업 시
-mu.RLock()
-defer mu.RUnlock()
-
-// 쓰기 작업 시
-mu.Lock()
-defer mu.Unlock()
 ```
 
 ## 🧪 테스트 시나리오

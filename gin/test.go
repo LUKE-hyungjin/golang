@@ -30,12 +30,16 @@ func findUserIndexByID(id string) int {
 func main() {
 	r := gin.Default()
 
-	// Users - list
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Hello, World!",
+		})
+	})
+
 	r.GET("/users", func(c *gin.Context) {
 		c.JSON(http.StatusOK, users)
 	})
 
-	// Users - get by id
 	r.GET("/users/:id", func(c *gin.Context) {
 		id := c.Param("id")
 		idx := findUserIndexByID(id)
@@ -46,7 +50,6 @@ func main() {
 		c.JSON(http.StatusOK, users[idx])
 	})
 
-	// Users - create
 	r.POST("/users", func(c *gin.Context) {
 		var body User
 		if err := c.ShouldBindJSON(&body); err != nil {
@@ -60,7 +63,6 @@ func main() {
 		c.JSON(http.StatusCreated, gin.H{"id": id, "user": u})
 	})
 
-	// Users - update (full)
 	r.PUT("/users/:id", func(c *gin.Context) {
 		id := c.Param("id")
 		var body User
@@ -80,8 +82,7 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"user": u})
 	})
 
-	// Users - delete
-	r.DELETE("/users/:id", func(c *gin.Context) {
+	r.DELETE("users/:id", func(c *gin.Context) {
 		id := c.Param("id")
 		idx := findUserIndexByID(id)
 		if idx == -1 {
@@ -92,7 +93,7 @@ func main() {
 		c.Status(http.StatusNoContent)
 	})
 
-	if err := r.Run(":3001"); err != nil {
+	if err := r.Run(":3002"); err != nil {
 		panic(err)
 	}
 }
