@@ -1,14 +1,23 @@
-# 02. HTTP 라우팅 기본
+# RESTful API 만들기: HTTP 라우팅 완벽 가이드 🛣️
 
-## 📌 개요
-Gin 프레임워크의 라우팅 시스템을 학습합니다. GET, POST, PUT, DELETE 등 다양한 HTTP 메서드별 라우팅 구현과 기본적인 RESTful API 패턴을 익힙니다.
+이전 챕터에서는 간단한 GET 요청만 다뤘죠? 이번에는 **진짜 API**를 만들어볼 거예요! 사용자를 생성하고, 조회하고, 수정하고, 삭제하는 완전한 API를 만들어봅시다.
 
-## 🎯 학습 목표
-- HTTP 메서드별 라우팅 구현 (GET, POST, PUT, DELETE)
-- RESTful API 설계 원칙 이해
-- 간단한 CRUD 작업 구현
-- HTTP 상태 코드 적절한 사용
-- 메모리 기반 데이터 저장소 구현 (슬라이스)
+## 무엇을 배우게 될까요?
+
+실제 서비스에서 사용하는 것처럼, 데이터를 다루는 4가지 기본 동작을 배워요:
+- 📖 **조회하기** (GET): 데이터 읽기
+- ✍️ **만들기** (POST): 새로운 데이터 추가
+- ✏️ **수정하기** (PUT): 기존 데이터 변경
+- 🗑️ **삭제하기** (DELETE): 데이터 제거
+
+이걸 개발자들은 **CRUD**(Create, Read, Update, Delete)라고 부릅니다!
+
+## 이번 챕터에서 배울 내용
+- 다양한 HTTP 메서드 사용하기 (GET, POST, PUT, DELETE)
+- RESTful API란 무엇인지 이해하기
+- 실전 사용자 관리 API 만들기
+- 올바른 HTTP 상태 코드 사용하기
+- 메모리에 데이터 저장하기 (간단한 데이터베이스처럼!)
 
 ## 📂 파일 구조
 ```
@@ -16,13 +25,34 @@ Gin 프레임워크의 라우팅 시스템을 학습합니다. GET, POST, PUT, D
 └── main.go     # 라우팅 예제 서버
 ```
 
-## 💻 코드 설명
+## 💻 코드 이해하기
 
-### 주요 구성 요소
+### 핵심 개념 살펴보기
 
-1. **User 구조체**: 사용자 데이터 모델
-2. **메모리 저장소**: `[]User` 슬라이스 기반 저장
-3. **RESTful 라우팅**: 리소스 기반 URL 설계
+#### 1️⃣ User 구조체 - 사용자 데이터 모델
+```go
+type User struct {
+    ID    string `json:"id"`
+    Name  string `json:"name"`
+    Email string `json:"email"`
+}
+```
+실제 서비스의 "사용자"를 코드로 표현한 거예요. 마치 엑셀의 한 행처럼, 사용자 한 명의 정보를 담고 있죠!
+
+#### 2️⃣ 메모리 저장소 - 간단한 데이터베이스
+```go
+var users []User  // 사용자들을 담는 배열
+```
+진짜 데이터베이스를 사용하기 전에, 메모리에 임시로 데이터를 저장해요. 서버를 끄면 데이터가 사라지지만, 연습하기엔 충분해요!
+
+#### 3️⃣ RESTful 라우팅 - URL 체계적으로 만들기
+```
+/users          → 모든 사용자 목록
+/users/:id      → 특정 사용자 한 명
+/users/:id      → 사용자 정보 수정
+/users/:id      → 사용자 삭제
+```
+URL만 봐도 무슨 기능인지 알 수 있죠? 이게 바로 RESTful API의 철학이에요!
 
 ### API 엔드포인트
 
@@ -109,28 +139,61 @@ curl -X DELETE http://localhost:3001/users/1
 # 응답: 204 No Content (본문 없음)
 ```
 
-## 📝 주요 학습 포인트
+## 💡 꼭 이해하고 넘어가야 할 개념!
 
-### 1. RESTful API 설계 원칙
-- **리소스 중심**: URL은 리소스를 나타냄 (/users, /users/:id)
-- **HTTP 메서드 활용**: 동작은 메서드로 표현 (GET, POST, PUT, DELETE)
-- **상태 코드**: 적절한 HTTP 상태 코드 반환
-- **일관성**: 예측 가능한 API 구조
+### RESTful API란 무엇일까요?
 
-### 2. HTTP 메서드별 용도
-```go
-// GET: 리소스 조회 (Read)
-r.GET("/users", getAllUsers)
+REST는 웹 API를 만드는 하나의 "스타일"이에요. 마치 건축에 여러 양식이 있듯이, API를 만드는 좋은 방법론이죠!
 
-// POST: 새 리소스 생성 (Create)
-r.POST("/users", createUser)
+#### RESTful API의 4가지 원칙
 
-// PUT: 리소스 전체 수정 (Update - Full)
-r.PUT("/users/:id", updateUser)
-
-// DELETE: 리소스 삭제 (Delete)
-r.DELETE("/users/:id", deleteUser)
+**1. 리소스 중심으로 URL 만들기**
 ```
+❌ 나쁜 예: /getUser, /createUser, /deleteUser
+✅ 좋은 예: /users  (동작은 HTTP 메서드로!)
+```
+
+**2. HTTP 메서드로 동작 구분하기**
+```go
+GET    /users     → 조회 (읽기)
+POST   /users     → 생성 (쓰기)
+PUT    /users/:id → 수정
+DELETE /users/:id → 삭제
+```
+
+**3. 적절한 상태 코드 사용하기**
+```
+200 OK          → 성공했어요!
+201 Created     → 새로 만들었어요!
+404 Not Found   → 찾을 수 없어요!
+```
+
+**4. 일관성 있게 만들기**
+모든 API가 같은 패턴을 따르면, 사용하기 쉬워져요!
+
+### HTTP 메서드 쉽게 이해하기 🎯
+
+각 메서드를 실생활에 비유해볼게요!
+
+```go
+// 📖 GET: 책을 "읽는" 것처럼, 데이터를 조회만 해요
+r.GET("/users", getAllUsers)
+// "사용자 목록 좀 보여주세요!"
+
+// ✍️ POST: 새 글을 "쓰는" 것처럼, 새로운 데이터를 만들어요
+r.POST("/users", createUser)
+// "새 사용자를 등록할게요!"
+
+// ✏️ PUT: 글을 "수정하는" 것처럼, 기존 데이터를 바꿔요
+r.PUT("/users/:id", updateUser)
+// "이 사용자 정보를 바꿀게요!"
+
+// 🗑️ DELETE: 글을 "삭제하는" 것처럼, 데이터를 지워요
+r.DELETE("/users/:id", deleteUser)
+// "이 사용자를 삭제할게요!"
+```
+
+💡 **기억하기**: 메서드가 "동사"의 역할을 하고, URL이 "명사"의 역할을 해요!
 
 ## 🧪 테스트 시나리오
 
